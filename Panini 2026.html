@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Panini WC 2026 — Checklist</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold:#D4A843; --gold-l:#F0C96A; --bg:#0f1117; --surf:#1a1d27; --surf2:#20243a;
+    --border:rgba(212,168,67,.18); --text:#e8e0cc; --muted:rgba(232,224,204,.45);
+    --green:#3dbf6e; --gbg:rgba(61,191,110,.12); --gborder:rgba(61,191,110,.35);
+    --r:10px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--bg);color:var(--text);font-family:'Barlow',sans-serif;min-height:100vh}
+
+  /* HEADER */
+  .hdr{background:linear-gradient(135deg,#0a0d15,#1a1200);border-bottom:2px solid var(--gold);padding:14px 16px 12px;position:sticky;top:0;z-index:100}
+  .hdr-row{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+  .hdr-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;line-height:1}
+  .hdr-sub{font-size:10px;color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-top:2px}
+  .hdr-right{text-align:right;flex-shrink:0}
+  .hdr-count{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--gold);line-height:1}
+  .hdr-count span{font-size:13px;color:var(--muted);font-family:'Barlow',sans-serif}
+  .pbar{height:5px;background:rgba(255,255,255,.1);border-radius:3px;margin-top:5px;overflow:hidden;width:110px}
+  .pfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-l));border-radius:3px;transition:width .4s}
+  .ppct{font-size:10px;color:var(--gold);margin-top:2px;text-align:right}
+
+  /* SEARCH */
+  .srch{padding:10px 16px 0}
+  .srch input{width:100%;background:var(--surf);border:1px solid var(--border);border-radius:var(--r);
+    color:var(--text);padding:10px 14px;font-family:'Barlow',sans-serif;font-size:15px;outline:none;-webkit-appearance:none}
+  .srch input:focus{border-color:var(--gold)}
+  .srch input::placeholder{color:var(--muted)}
+
+  /* GROUP TABS */
+  .gtabs{overflow-x:auto;padding:10px 16px 0;-webkit-overflow-scrolling:touch}
+  .gtabs::-webkit-scrollbar{display:none}
+  .gtabs-inner{display:flex;gap:6px;flex-wrap:nowrap}
+  .gtab{flex-shrink:0;background:var(--surf);border:1.5px solid var(--border);border-radius:8px;
+    color:var(--muted);padding:7px 13px;font-family:'Bebas Neue',sans-serif;font-size:18px;
+    letter-spacing:1px;cursor:pointer;transition:all .15s}
+  .gtab.active{background:rgba(212,168,67,.15);border-color:var(--gold);color:var(--gold)}
+  .gtab.done{background:var(--gbg);border-color:var(--gborder);color:var(--green)}
+
+  /* SPECIAL TAB ROW */
+  .stabs{display:flex;gap:6px;padding:8px 16px 0;flex-wrap:wrap}
+  .stab{background:var(--surf);border:1.5px solid var(--border);border-radius:8px;
+    color:var(--muted);padding:6px 12px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;
+    letter-spacing:.5px;text-transform:uppercase;cursor:pointer;transition:all .15s}
+  .stab.active{background:rgba(212,168,67,.15);border-color:var(--gold);color:var(--gold)}
+  .stab.done{background:var(--gbg);border-color:var(--gborder);color:var(--green)}
+
+  /* GROUP HEADER */
+  .grp-header{margin:14px 16px 0;padding:14px 16px;background:var(--surf);border:1px solid var(--border);border-radius:var(--r)}
+  .grp-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--gold)}
+  .grp-teams{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .grp-team-pill{display:flex;align-items:center;gap:5px;background:var(--surf2);border:1px solid var(--border);
+    border-radius:20px;padding:5px 10px;cursor:pointer;transition:all .15s;font-size:13px;font-weight:600}
+  .grp-team-pill.active{border-color:var(--gold);color:var(--gold)}
+  .grp-team-pill.done{border-color:var(--green);color:var(--green)}
+  .pill-flag{font-size:16px}
+  .pill-pct{font-size:11px;opacity:.6;margin-left:2px}
+
+  /* TEAM SUBHEADER */
+  .team-hdr{margin:10px 16px 0;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:12px 14px;background:var(--surf2);border:1px solid var(--border);border-radius:var(--r)}
+  .team-hdr-left{display:flex;align-items:center;gap:10px}
+  .team-flag{font-size:34px;line-height:1}
+  .team-name-lbl{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:1px}
+  .team-stat{font-size:11px;color:var(--muted);margin-top:2px}
+  .team-btns{display:flex;flex-direction:column;gap:5px}
+  .btn{border:none;border-radius:6px;font-family:'Barlow',sans-serif;font-weight:700;font-size:12px;
+    letter-spacing:.5px;text-transform:uppercase;cursor:pointer;padding:6px 11px;transition:all .15s;white-space:nowrap}
+  .btn-gold{background:var(--gold);color:#0a0d15}
+  .btn-out{background:transparent;color:var(--muted);border:1px solid rgba(232,224,204,.2)}
+  .btn-out:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* TEAM PROGRESS BAR */
+  .tbar-wrap{height:5px;background:rgba(255,255,255,.07);border-radius:3px;margin:8px 16px 0;overflow:hidden}
+  .tbar-fill{height:100%;border-radius:3px;transition:width .4s}
+
+  /* FILTER */
+  .frow{display:flex;gap:7px;padding:8px 16px 0}
+  .fbtn{flex:1;background:var(--surf);border:1.5px solid var(--border);border-radius:7px;
+    color:var(--muted);padding:8px 4px;font-family:'Barlow',sans-serif;font-size:12px;font-weight:700;
+    text-transform:uppercase;letter-spacing:.5px;cursor:pointer;transition:all .15s;text-align:center}
+  .fbtn.active{background:rgba(212,168,67,.12);border-color:var(--gold);color:var(--gold)}
+
+  /* STICKER LIST */
+  .slist{padding:8px 16px 80px;display:flex;flex-direction:column;gap:5px}
+
+  .srow{display:flex;align-items:center;gap:12px;background:var(--surf);border:1.5px solid var(--border);
+    border-radius:var(--r);padding:11px 14px;cursor:pointer;transition:all .15s;-webkit-tap-highlight-color:transparent}
+  .srow:active{transform:scale(.98)}
+  .srow.chk{background:var(--gbg);border-color:var(--gborder)}
+  .srow.foil-s{border-color:rgba(212,168,67,.3);background:rgba(212,168,67,.05)}
+  .srow.foil-s.chk{background:var(--gbg);border-color:var(--gborder)}
+
+  .chkbox{width:26px;height:26px;border-radius:6px;flex-shrink:0;border:2px solid rgba(255,255,255,.2);
+    display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;
+    color:#fff;transition:all .15s}
+  .srow.chk .chkbox{background:var(--green);border-color:var(--green)}
+
+  .snum{font-family:'Bebas Neue',sans-serif;font-size:18px;font-weight:700;color:var(--gold);
+    min-width:58px;flex-shrink:0;letter-spacing:.5px}
+  .srow.chk .snum{color:var(--green)}
+
+  .stag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+    padding:2px 6px;border-radius:3px}
+  .tag-foil{background:rgba(212,168,67,.15);color:var(--gold)}
+  .tag-photo{background:rgba(100,140,255,.15);color:#8aabff}
+  .tag-player{background:rgba(255,255,255,.06);color:var(--muted)}
+
+  /* BOTTOM JUMP */
+  .bnav{position:fixed;bottom:0;left:0;right:0;background:rgba(15,17,23,.97);border-top:1px solid var(--border);
+    padding:8px 16px;display:flex;gap:8px;align-items:center;backdrop-filter:blur(10px);z-index:99}
+  .bnav-lbl{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;flex-shrink:0}
+  .bnav-sel{flex:1;background:var(--surf);border:1px solid var(--border);border-radius:7px;
+    color:var(--text);padding:8px 10px;font-family:'Barlow',sans-serif;font-size:14px;font-weight:600;
+    -webkit-appearance:none;outline:none}
+  .bnav-sel:focus{border-color:var(--gold)}
+
+  /* EMPTY */
+  .empty{text-align:center;padding:50px 20px;color:var(--muted)}
+  .empty-icon{font-size:44px;margin-bottom:10px}
+
+  /* EXPORT MODAL */
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:200;display:flex;align-items:flex-end;justify-content:center;backdrop-filter:blur(4px)}
+  .modal{background:var(--surf);border:1px solid var(--border);border-radius:16px 16px 0 0;width:100%;max-width:560px;padding:20px 18px 36px;max-height:85vh;overflow-y:auto}
+  .modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:var(--gold);margin-bottom:4px}
+  .modal-sub{font-size:12px;color:var(--muted);margin-bottom:16px}
+  .modal-close{float:right;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1;padding:0}
+  .export-card{background:var(--surf2);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:10px}
+  .export-card-title{font-weight:700;font-size:14px;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+  .export-card-desc{font-size:12px;color:var(--muted);margin-bottom:10px}
+  .export-btn{display:block;width:100%;background:var(--gold);color:#0a0d15;border:none;border-radius:7px;
+    font-family:'Barlow',sans-serif;font-weight:700;font-size:14px;letter-spacing:.5px;
+    text-transform:uppercase;padding:10px;cursor:pointer;transition:all .15s;text-align:center}
+  .export-btn:active{filter:brightness(.9)}
+  .export-btn.secondary{background:var(--surf);color:var(--text);border:1px solid var(--border);margin-top:7px}
+  .export-btn.danger{background:rgba(200,50,50,.15);color:#ff8888;border:1px solid rgba(200,50,50,.3);margin-top:7px}
+  .export-textarea{width:100%;background:#0a0d15;border:1px solid var(--border);border-radius:7px;
+    color:var(--text);font-family:'Barlow',sans-serif;font-size:12px;padding:10px;
+    resize:none;outline:none;margin-top:8px;line-height:1.5}
+  .export-textarea:focus{border-color:var(--gold)}
+  .copied-toast{position:fixed;bottom:70px;left:50%;transform:translateX(-50%);
+    background:var(--green);color:#0a0d15;font-weight:700;font-size:13px;
+    padding:8px 18px;border-radius:20px;z-index:300;opacity:0;transition:opacity .3s;pointer-events:none}
+  .copied-toast.show{opacity:1}
+
+  /* EXPORT BUTTON in bottom nav */
+  .bnav-export{background:var(--surf2);color:var(--muted);border:1px solid var(--border);border-radius:7px;
+    font-size:18px;padding:8px 10px;cursor:pointer;flex-shrink:0;transition:all .15s}
+  .bnav-export:hover{border-color:var(--gold);color:var(--gold)}
+
+  /* QUANTITY CONTROLS */
+  .qty-wrap{display:flex;align-items:center;gap:0;margin-left:auto;flex-shrink:0}
+  .qty-btn{width:30px;height:30px;border:none;border-radius:6px;font-size:18px;font-weight:700;
+    cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;
+    background:rgba(255,255,255,.08);color:var(--text);-webkit-tap-highlight-color:transparent}
+  .qty-btn:active{transform:scale(.9)}
+  .qty-btn.qminus{color:#ff7777}
+  .qty-btn.qplus{color:var(--green)}
+  .qty-num{font-family:'Bebas Neue',sans-serif;font-size:20px;min-width:28px;text-align:center;
+    color:var(--text);line-height:1}
+  .qty-num.has-extra{color:#f0a830}
+
+  /* DOUBLES BADGE on sticker row */
+  .dbl-badge{background:#f0a830;color:#0a0d15;font-family:'Bebas Neue',sans-serif;
+    font-size:12px;padding:2px 6px;border-radius:4px;margin-left:4px;flex-shrink:0}
+
+  /* DOUBLES VIEW */
+  .doubles-view{padding:10px 16px 80px}
+  .dbl-header{display:flex;align-items:center;justify-content:space-between;
+    padding:12px 0 8px;border-bottom:1px solid var(--border);margin-bottom:12px}
+  .dbl-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;color:#f0a830}
+  .dbl-total{font-size:12px;color:var(--muted)}
+  .dbl-team-block{margin-bottom:16px}
+  .dbl-team-label{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:700;
+    color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:6px}
+  .dbl-row{display:flex;align-items:center;gap:10px;background:var(--surf);
+    border:1.5px solid rgba(240,168,48,.25);border-radius:var(--r);
+    padding:10px 14px;margin-bottom:5px}
+  .dbl-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:#f0a830;min-width:58px;flex-shrink:0}
+  .dbl-x{font-family:'Bebas Neue',sans-serif;font-size:22px;color:#f0a830;margin-left:auto}
+
+  /* BOTTOM NAV with doubles button */
+  .bnav-doubles{background:#f0a830;color:#0a0d15;border:none;border-radius:7px;
+    font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;
+    padding:8px 12px;cursor:pointer;flex-shrink:0;transition:all .15s;white-space:nowrap}
+  .bnav-doubles.active-dbl{background:#d4880a}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-row">
+    <div>
+      <div class="hdr-sub">2026 FIFA World Cup™ · Panini</div>
+      <div class="hdr-title">Sticker Checklist</div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-count" id="gCount">0 <span>/ 980</span></div>
+      <div class="pbar"><div class="pfill" id="gBar" style="width:0%"></div></div>
+      <div class="ppct" id="gPct">0%</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEARCH -->
+<div class="srch"><input type="search" placeholder="🔍  Search team…" id="srchIn" oninput="doSearch(this.value)" autocomplete="off"></div>
+
+<!-- GROUP TABS A–L -->
+<div class="gtabs"><div class="gtabs-inner" id="groupTabs"></div></div>
+
+<!-- SPECIAL TABS -->
+<div class="stabs" id="specialTabs"></div>
+
+<!-- GROUP HEADER (team pills) -->
+<div class="grp-header" id="grpHeader" style="display:none">
+  <div class="grp-title" id="grpTitle"></div>
+  <div class="grp-teams" id="grpTeams"></div>
+</div>
+
+<!-- TEAM SUB-HEADER -->
+<div class="team-hdr" id="teamHdr" style="display:none">
+  <div class="team-hdr-left">
+    <div class="team-flag" id="tFlag"></div>
+    <div>
+      <div class="team-name-lbl" id="tName"></div>
+      <div class="team-stat" id="tStat"></div>
+    </div>
+  </div>
+  <div class="team-btns">
+    <button class="btn btn-gold" onclick="markAll()">Mark All ✓</button>
+    <button class="btn btn-out" onclick="resetTeam()">Reset</button>
+  </div>
+</div>
+<div class="tbar-wrap"><div class="tbar-fill" id="tBar" style="width:0%"></div></div>
+
+<!-- FILTER -->
+<div class="frow">
+  <button class="fbtn active" id="fAll" onclick="setFilter('all')">All</button>
+  <button class="fbtn" id="fMissing" onclick="setFilter('missing')">Missing</button>
+  <button class="fbtn" id="fHave" onclick="setFilter('have')">Have ✓</button>
+  <button class="fbtn" id="fGlobalMissing" onclick="toggleGlobalMissing()" style="border-color:rgba(239,120,48,.35);color:rgba(239,120,48,.7)">🌍 All Missing</button>
+</div>
+
+<!-- STICKER LIST -->
+<div class="slist" id="slist"></div>
+
+<!-- GLOBAL MISSING VIEW -->
+<div class="doubles-view" id="globalMissingView" style="display:none"></div>
+
+<!-- EXPORT MODAL -->
+<div class="modal-overlay" id="exportModal" style="display:none" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">📤 Export / Import</div>
+    <div class="modal-sub">Save your progress or share your doubles list</div>
+
+    <!-- Share missing -->
+    <div class="export-card">
+      <div class="export-card-title">🔍 Share My Missing Stickers</div>
+      <div class="export-card-desc">Generates a list of every sticker you still need — great to share with friends or traders so they know what to look for.</div>
+      <button class="export-btn" style="background:#e87830" onclick="shareMissing()">📋 Copy Missing List</button>
+    </div>
+
+    <!-- Share doubles -->
+    <div class="export-card">
+      <div class="export-card-title">🔁 Share My Doubles</div>
+      <div class="export-card-desc">Generates a clean text list of your repeated stickers — easy to send to a friend or trader via WhatsApp, message, or email.</div>
+      <button class="export-btn" onclick="shareDoubles()">📋 Copy Doubles List</button>
+    </div>
+
+    <!-- Full backup -->
+    <div class="export-card">
+      <div class="export-card-title">💾 Full Backup</div>
+      <div class="export-card-desc">Copies all your progress (checked stickers + doubles) as a code. Save it somewhere safe to restore later on any device.</div>
+      <button class="export-btn secondary" onclick="exportBackup()">📋 Copy Backup Code</button>
+    </div>
+
+    <!-- Import -->
+    <div class="export-card">
+      <div class="export-card-title">📥 Restore Backup</div>
+      <div class="export-card-desc">Paste a previously exported backup code below to restore your progress. <strong>This will overwrite your current data.</strong></div>
+      <textarea class="export-textarea" id="importText" rows="4" placeholder="Paste your backup code here…"></textarea>
+      <button class="export-btn secondary" onclick="importBackup()">✅ Restore from Code</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="copied-toast" id="toast"></div>
+
+<!-- DOUBLES VIEW -->
+<div class="doubles-view" id="doublesView" style="display:none"></div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <button class="bnav-export" onclick="openModal()" title="Export / Import">📤</button>
+  <select class="bnav-sel" id="jumpSel" onchange="jumpTo(this.value)"></select>
+  <button class="bnav-doubles" id="dblBtn" onclick="toggleDoubles()">🔁 Doubles</button>
+</div>
+
+<script>
+// ──────────────────────────────────────────────────────
+// WORLD CUP 2026 — OFFICIAL GROUPS
+// ──────────────────────────────────────────────────────
+const GROUPS = [
+  { id:'A', teams:['MEX','RSA','KOR','CZE'] },
+  { id:'B', teams:['CAN','BIH','QAT','SUI'] },
+  { id:'C', teams:['BRA','MAR','HAI','SCO'] },
+  { id:'D', teams:['USA','PAR','AUS','TUR'] },
+  { id:'E', teams:['GER','CUW','CIV','ECU'] },
+  { id:'F', teams:['NED','JPN','SWE','TUN'] },
+  { id:'G', teams:['BEL','EGY','IRN','NZL'] },
+  { id:'H', teams:['ESP','CPV','SAU','URU'] },
+  { id:'I', teams:['FRA','SEN','IRQ','NOR'] },
+  { id:'J', teams:['ARG','ALG','AUT','JOR'] },
+  { id:'K', teams:['POR','COD','UZB','COL'] },
+  { id:'L', teams:['ENG','CRO','GHA','PAN'] },
+];
+const SPECIAL = [
+  { id:'FWC', label:'⭐ Special / FWC' },
+  { id:'CC',  label:'🥤 Coca-Cola' },
+];
+
+// ──────────────────────────────────────────────────────
+// TEAM DATA  (20 stickers each — badge, 18 players, photo)
+// type: 'badge' | 'player' | 'photo'
+// ──────────────────────────────────────────────────────
+const TEAMS = {
+  MEX:{name:"Mexico",flag:"🇲🇽",color:"#006847",
+    s:[{n:"MEX1",t:"badge"},{n:"MEX2",t:"player"},{n:"MEX3",t:"player"},{n:"MEX4",t:"player"},{n:"MEX5",t:"player"},
+       {n:"MEX6",t:"player"},{n:"MEX7",t:"player"},{n:"MEX8",t:"player"},{n:"MEX9",t:"player"},{n:"MEX10",t:"player"},
+       {n:"MEX11",t:"player"},{n:"MEX12",t:"player"},{n:"MEX13",t:"photo"},{n:"MEX14",t:"player"},{n:"MEX15",t:"player"},
+       {n:"MEX16",t:"player"},{n:"MEX17",t:"player"},{n:"MEX18",t:"player"},{n:"MEX19",t:"player"},{n:"MEX20",t:"player"}]},
+  RSA:{name:"South Africa",flag:"🇿🇦",color:"#007A4D",
+    s:[{n:"RSA1",t:"badge"},{n:"RSA2",t:"player"},{n:"RSA3",t:"player"},{n:"RSA4",t:"player"},{n:"RSA5",t:"player"},
+       {n:"RSA6",t:"player"},{n:"RSA7",t:"player"},{n:"RSA8",t:"player"},{n:"RSA9",t:"player"},{n:"RSA10",t:"player"},
+       {n:"RSA11",t:"player"},{n:"RSA12",t:"player"},{n:"RSA13",t:"photo"},{n:"RSA14",t:"player"},{n:"RSA15",t:"player"},
+       {n:"RSA16",t:"player"},{n:"RSA17",t:"player"},{n:"RSA18",t:"player"},{n:"RSA19",t:"player"},{n:"RSA20",t:"player"}]},
+  KOR:{name:"South Korea",flag:"🇰🇷",color:"#C60C30",
+    s:[{n:"KOR1",t:"badge"},{n:"KOR2",t:"player"},{n:"KOR3",t:"player"},{n:"KOR4",t:"player"},{n:"KOR5",t:"player"},
+       {n:"KOR6",t:"player"},{n:"KOR7",t:"player"},{n:"KOR8",t:"player"},{n:"KOR9",t:"player"},{n:"KOR10",t:"player"},
+       {n:"KOR11",t:"player"},{n:"KOR12",t:"player"},{n:"KOR13",t:"photo"},{n:"KOR14",t:"player"},{n:"KOR15",t:"player"},
+       {n:"KOR16",t:"player"},{n:"KOR17",t:"player"},{n:"KOR18",t:"player"},{n:"KOR19",t:"player"},{n:"KOR20",t:"player"}]},
+  CZE:{name:"Czechia",flag:"🇨🇿",color:"#D7141A",
+    s:[{n:"CZE1",t:"badge"},{n:"CZE2",t:"player"},{n:"CZE3",t:"player"},{n:"CZE4",t:"player"},{n:"CZE5",t:"player"},
+       {n:"CZE6",t:"player"},{n:"CZE7",t:"player"},{n:"CZE8",t:"player"},{n:"CZE9",t:"player"},{n:"CZE10",t:"player"},
+       {n:"CZE11",t:"player"},{n:"CZE12",t:"player"},{n:"CZE13",t:"photo"},{n:"CZE14",t:"player"},{n:"CZE15",t:"player"},
+       {n:"CZE16",t:"player"},{n:"CZE17",t:"player"},{n:"CZE18",t:"player"},{n:"CZE19",t:"player"},{n:"CZE20",t:"player"}]},
+  CAN:{name:"Canada",flag:"🇨🇦",color:"#FF0000",
+    s:[{n:"CAN1",t:"badge"},{n:"CAN2",t:"player"},{n:"CAN3",t:"player"},{n:"CAN4",t:"player"},{n:"CAN5",t:"player"},
+       {n:"CAN6",t:"player"},{n:"CAN7",t:"player"},{n:"CAN8",t:"player"},{n:"CAN9",t:"player"},{n:"CAN10",t:"player"},
+       {n:"CAN11",t:"player"},{n:"CAN12",t:"player"},{n:"CAN13",t:"photo"},{n:"CAN14",t:"player"},{n:"CAN15",t:"player"},
+       {n:"CAN16",t:"player"},{n:"CAN17",t:"player"},{n:"CAN18",t:"player"},{n:"CAN19",t:"player"},{n:"CAN20",t:"player"}]},
+  BIH:{name:"Bosnia & Herz.",flag:"🇧🇦",color:"#002395",
+    s:[{n:"BIH1",t:"badge"},{n:"BIH2",t:"player"},{n:"BIH3",t:"player"},{n:"BIH4",t:"player"},{n:"BIH5",t:"player"},
+       {n:"BIH6",t:"player"},{n:"BIH7",t:"player"},{n:"BIH8",t:"player"},{n:"BIH9",t:"player"},{n:"BIH10",t:"player"},
+       {n:"BIH11",t:"player"},{n:"BIH12",t:"player"},{n:"BIH13",t:"photo"},{n:"BIH14",t:"player"},{n:"BIH15",t:"player"},
+       {n:"BIH16",t:"player"},{n:"BIH17",t:"player"},{n:"BIH18",t:"player"},{n:"BIH19",t:"player"},{n:"BIH20",t:"player"}]},
+  QAT:{name:"Qatar",flag:"🇶🇦",color:"#8D1B3D",
+    s:[{n:"QAT1",t:"badge"},{n:"QAT2",t:"player"},{n:"QAT3",t:"player"},{n:"QAT4",t:"player"},{n:"QAT5",t:"player"},
+       {n:"QAT6",t:"player"},{n:"QAT7",t:"player"},{n:"QAT8",t:"player"},{n:"QAT9",t:"player"},{n:"QAT10",t:"player"},
+       {n:"QAT11",t:"player"},{n:"QAT12",t:"player"},{n:"QAT13",t:"photo"},{n:"QAT14",t:"player"},{n:"QAT15",t:"player"},
+       {n:"QAT16",t:"player"},{n:"QAT17",t:"player"},{n:"QAT18",t:"player"},{n:"QAT19",t:"player"},{n:"QAT20",t:"player"}]},
+  SUI:{name:"Switzerland",flag:"🇨🇭",color:"#FF0000",
+    s:[{n:"SUI1",t:"badge"},{n:"SUI2",t:"player"},{n:"SUI3",t:"player"},{n:"SUI4",t:"player"},{n:"SUI5",t:"player"},
+       {n:"SUI6",t:"player"},{n:"SUI7",t:"player"},{n:"SUI8",t:"player"},{n:"SUI9",t:"player"},{n:"SUI10",t:"player"},
+       {n:"SUI11",t:"player"},{n:"SUI12",t:"player"},{n:"SUI13",t:"photo"},{n:"SUI14",t:"player"},{n:"SUI15",t:"player"},
+       {n:"SUI16",t:"player"},{n:"SUI17",t:"player"},{n:"SUI18",t:"player"},{n:"SUI19",t:"player"},{n:"SUI20",t:"player"}]},
+  BRA:{name:"Brazil",flag:"🇧🇷",color:"#009C3B",
+    s:[{n:"BRA1",t:"badge"},{n:"BRA2",t:"player"},{n:"BRA3",t:"player"},{n:"BRA4",t:"player"},{n:"BRA5",t:"player"},
+       {n:"BRA6",t:"player"},{n:"BRA7",t:"player"},{n:"BRA8",t:"player"},{n:"BRA9",t:"player"},{n:"BRA10",t:"player"},
+       {n:"BRA11",t:"player"},{n:"BRA12",t:"player"},{n:"BRA13",t:"photo"},{n:"BRA14",t:"player"},{n:"BRA15",t:"player"},
+       {n:"BRA16",t:"player"},{n:"BRA17",t:"player"},{n:"BRA18",t:"player"},{n:"BRA19",t:"player"},{n:"BRA20",t:"player"}]},
+  MAR:{name:"Morocco",flag:"🇲🇦",color:"#C1272D",
+    s:[{n:"MAR1",t:"badge"},{n:"MAR2",t:"player"},{n:"MAR3",t:"player"},{n:"MAR4",t:"player"},{n:"MAR5",t:"player"},
+       {n:"MAR6",t:"player"},{n:"MAR7",t:"player"},{n:"MAR8",t:"player"},{n:"MAR9",t:"player"},{n:"MAR10",t:"player"},
+       {n:"MAR11",t:"player"},{n:"MAR12",t:"player"},{n:"MAR13",t:"photo"},{n:"MAR14",t:"player"},{n:"MAR15",t:"player"},
+       {n:"MAR16",t:"player"},{n:"MAR17",t:"player"},{n:"MAR18",t:"player"},{n:"MAR19",t:"player"},{n:"MAR20",t:"player"}]},
+  HAI:{name:"Haiti",flag:"🇭🇹",color:"#00209F",
+    s:[{n:"HAI1",t:"badge"},{n:"HAI2",t:"player"},{n:"HAI3",t:"player"},{n:"HAI4",t:"player"},{n:"HAI5",t:"player"},
+       {n:"HAI6",t:"player"},{n:"HAI7",t:"player"},{n:"HAI8",t:"player"},{n:"HAI9",t:"player"},{n:"HAI10",t:"player"},
+       {n:"HAI11",t:"player"},{n:"HAI12",t:"player"},{n:"HAI13",t:"photo"},{n:"HAI14",t:"player"},{n:"HAI15",t:"player"},
+       {n:"HAI16",t:"player"},{n:"HAI17",t:"player"},{n:"HAI18",t:"player"},{n:"HAI19",t:"player"},{n:"HAI20",t:"player"}]},
+  SCO:{name:"Scotland",flag:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",color:"#003F87",
+    s:[{n:"SCO1",t:"badge"},{n:"SCO2",t:"player"},{n:"SCO3",t:"player"},{n:"SCO4",t:"player"},{n:"SCO5",t:"player"},
+       {n:"SCO6",t:"player"},{n:"SCO7",t:"player"},{n:"SCO8",t:"player"},{n:"SCO9",t:"player"},{n:"SCO10",t:"player"},
+       {n:"SCO11",t:"player"},{n:"SCO12",t:"player"},{n:"SCO13",t:"photo"},{n:"SCO14",t:"player"},{n:"SCO15",t:"player"},
+       {n:"SCO16",t:"player"},{n:"SCO17",t:"player"},{n:"SCO18",t:"player"},{n:"SCO19",t:"player"},{n:"SCO20",t:"player"}]},
+  USA:{name:"USA",flag:"🇺🇸",color:"#002868",
+    s:[{n:"USA1",t:"badge"},{n:"USA2",t:"player"},{n:"USA3",t:"player"},{n:"USA4",t:"player"},{n:"USA5",t:"player"},
+       {n:"USA6",t:"player"},{n:"USA7",t:"player"},{n:"USA8",t:"player"},{n:"USA9",t:"player"},{n:"USA10",t:"player"},
+       {n:"USA11",t:"player"},{n:"USA12",t:"player"},{n:"USA13",t:"photo"},{n:"USA14",t:"player"},{n:"USA15",t:"player"},
+       {n:"USA16",t:"player"},{n:"USA17",t:"player"},{n:"USA18",t:"player"},{n:"USA19",t:"player"},{n:"USA20",t:"player"}]},
+  PAR:{name:"Paraguay",flag:"🇵🇾",color:"#D52B1E",
+    s:[{n:"PAR1",t:"badge"},{n:"PAR2",t:"player"},{n:"PAR3",t:"player"},{n:"PAR4",t:"player"},{n:"PAR5",t:"player"},
+       {n:"PAR6",t:"player"},{n:"PAR7",t:"player"},{n:"PAR8",t:"player"},{n:"PAR9",t:"player"},{n:"PAR10",t:"player"},
+       {n:"PAR11",t:"player"},{n:"PAR12",t:"player"},{n:"PAR13",t:"photo"},{n:"PAR14",t:"player"},{n:"PAR15",t:"player"},
+       {n:"PAR16",t:"player"},{n:"PAR17",t:"player"},{n:"PAR18",t:"player"},{n:"PAR19",t:"player"},{n:"PAR20",t:"player"}]},
+  AUS:{name:"Australia",flag:"🇦🇺",color:"#00843D",
+    s:[{n:"AUS1",t:"badge"},{n:"AUS2",t:"player"},{n:"AUS3",t:"player"},{n:"AUS4",t:"player"},{n:"AUS5",t:"player"},
+       {n:"AUS6",t:"player"},{n:"AUS7",t:"player"},{n:"AUS8",t:"player"},{n:"AUS9",t:"player"},{n:"AUS10",t:"player"},
+       {n:"AUS11",t:"player"},{n:"AUS12",t:"player"},{n:"AUS13",t:"photo"},{n:"AUS14",t:"player"},{n:"AUS15",t:"player"},
+       {n:"AUS16",t:"player"},{n:"AUS17",t:"player"},{n:"AUS18",t:"player"},{n:"AUS19",t:"player"},{n:"AUS20",t:"player"}]},
+  TUR:{name:"Türkiye",flag:"🇹🇷",color:"#E30A17",
+    s:[{n:"TUR1",t:"badge"},{n:"TUR2",t:"player"},{n:"TUR3",t:"player"},{n:"TUR4",t:"player"},{n:"TUR5",t:"player"},
+       {n:"TUR6",t:"player"},{n:"TUR7",t:"player"},{n:"TUR8",t:"player"},{n:"TUR9",t:"player"},{n:"TUR10",t:"player"},
+       {n:"TUR11",t:"player"},{n:"TUR12",t:"player"},{n:"TUR13",t:"photo"},{n:"TUR14",t:"player"},{n:"TUR15",t:"player"},
+       {n:"TUR16",t:"player"},{n:"TUR17",t:"player"},{n:"TUR18",t:"player"},{n:"TUR19",t:"player"},{n:"TUR20",t:"player"}]},
+  GER:{name:"Germany",flag:"🇩🇪",color:"#555",
+    s:[{n:"GER1",t:"badge"},{n:"GER2",t:"player"},{n:"GER3",t:"player"},{n:"GER4",t:"player"},{n:"GER5",t:"player"},
+       {n:"GER6",t:"player"},{n:"GER7",t:"player"},{n:"GER8",t:"player"},{n:"GER9",t:"player"},{n:"GER10",t:"player"},
+       {n:"GER11",t:"player"},{n:"GER12",t:"player"},{n:"GER13",t:"photo"},{n:"GER14",t:"player"},{n:"GER15",t:"player"},
+       {n:"GER16",t:"player"},{n:"GER17",t:"player"},{n:"GER18",t:"player"},{n:"GER19",t:"player"},{n:"GER20",t:"player"}]},
+  CUW:{name:"Curaçao",flag:"🇨🇼",color:"#002B7F",
+    s:[{n:"CUW1",t:"badge"},{n:"CUW2",t:"player"},{n:"CUW3",t:"player"},{n:"CUW4",t:"player"},{n:"CUW5",t:"player"},
+       {n:"CUW6",t:"player"},{n:"CUW7",t:"player"},{n:"CUW8",t:"player"},{n:"CUW9",t:"player"},{n:"CUW10",t:"player"},
+       {n:"CUW11",t:"player"},{n:"CUW12",t:"player"},{n:"CUW13",t:"photo"},{n:"CUW14",t:"player"},{n:"CUW15",t:"player"},
+       {n:"CUW16",t:"player"},{n:"CUW17",t:"player"},{n:"CUW18",t:"player"},{n:"CUW19",t:"player"},{n:"CUW20",t:"player"}]},
+  CIV:{name:"Ivory Coast",flag:"🇨🇮",color:"#F77F00",
+    s:[{n:"CIV1",t:"badge"},{n:"CIV2",t:"player"},{n:"CIV3",t:"player"},{n:"CIV4",t:"player"},{n:"CIV5",t:"player"},
+       {n:"CIV6",t:"player"},{n:"CIV7",t:"player"},{n:"CIV8",t:"player"},{n:"CIV9",t:"player"},{n:"CIV10",t:"player"},
+       {n:"CIV11",t:"player"},{n:"CIV12",t:"player"},{n:"CIV13",t:"photo"},{n:"CIV14",t:"player"},{n:"CIV15",t:"player"},
+       {n:"CIV16",t:"player"},{n:"CIV17",t:"player"},{n:"CIV18",t:"player"},{n:"CIV19",t:"player"},{n:"CIV20",t:"player"}]},
+  ECU:{name:"Ecuador",flag:"🇪🇨",color:"#FFD100",
+    s:[{n:"ECU1",t:"badge"},{n:"ECU2",t:"player"},{n:"ECU3",t:"player"},{n:"ECU4",t:"player"},{n:"ECU5",t:"player"},
+       {n:"ECU6",t:"player"},{n:"ECU7",t:"player"},{n:"ECU8",t:"player"},{n:"ECU9",t:"player"},{n:"ECU10",t:"player"},
+       {n:"ECU11",t:"player"},{n:"ECU12",t:"player"},{n:"ECU13",t:"photo"},{n:"ECU14",t:"player"},{n:"ECU15",t:"player"},
+       {n:"ECU16",t:"player"},{n:"ECU17",t:"player"},{n:"ECU18",t:"player"},{n:"ECU19",t:"player"},{n:"ECU20",t:"player"}]},
+  NED:{name:"Netherlands",flag:"🇳🇱",color:"#FF4F00",
+    s:[{n:"NED1",t:"badge"},{n:"NED2",t:"player"},{n:"NED3",t:"player"},{n:"NED4",t:"player"},{n:"NED5",t:"player"},
+       {n:"NED6",t:"player"},{n:"NED7",t:"player"},{n:"NED8",t:"player"},{n:"NED9",t:"player"},{n:"NED10",t:"player"},
+       {n:"NED11",t:"player"},{n:"NED12",t:"player"},{n:"NED13",t:"photo"},{n:"NED14",t:"player"},{n:"NED15",t:"player"},
+       {n:"NED16",t:"player"},{n:"NED17",t:"player"},{n:"NED18",t:"player"},{n:"NED19",t:"player"},{n:"NED20",t:"player"}]},
+  JPN:{name:"Japan",flag:"🇯🇵",color:"#BC002D",
+    s:[{n:"JPN1",t:"badge"},{n:"JPN2",t:"player"},{n:"JPN3",t:"player"},{n:"JPN4",t:"player"},{n:"JPN5",t:"player"},
+       {n:"JPN6",t:"player"},{n:"JPN7",t:"player"},{n:"JPN8",t:"player"},{n:"JPN9",t:"player"},{n:"JPN10",t:"player"},
+       {n:"JPN11",t:"player"},{n:"JPN12",t:"player"},{n:"JPN13",t:"photo"},{n:"JPN14",t:"player"},{n:"JPN15",t:"player"},
+       {n:"JPN16",t:"player"},{n:"JPN17",t:"player"},{n:"JPN18",t:"player"},{n:"JPN19",t:"player"},{n:"JPN20",t:"player"}]},
+  SWE:{name:"Sweden",flag:"🇸🇪",color:"#006AA7",
+    s:[{n:"SWE1",t:"badge"},{n:"SWE2",t:"player"},{n:"SWE3",t:"player"},{n:"SWE4",t:"player"},{n:"SWE5",t:"player"},
+       {n:"SWE6",t:"player"},{n:"SWE7",t:"player"},{n:"SWE8",t:"player"},{n:"SWE9",t:"player"},{n:"SWE10",t:"player"},
+       {n:"SWE11",t:"player"},{n:"SWE12",t:"player"},{n:"SWE13",t:"photo"},{n:"SWE14",t:"player"},{n:"SWE15",t:"player"},
+       {n:"SWE16",t:"player"},{n:"SWE17",t:"player"},{n:"SWE18",t:"player"},{n:"SWE19",t:"player"},{n:"SWE20",t:"player"}]},
+  TUN:{name:"Tunisia",flag:"🇹🇳",color:"#E70013",
+    s:[{n:"TUN1",t:"badge"},{n:"TUN2",t:"player"},{n:"TUN3",t:"player"},{n:"TUN4",t:"player"},{n:"TUN5",t:"player"},
+       {n:"TUN6",t:"player"},{n:"TUN7",t:"player"},{n:"TUN8",t:"player"},{n:"TUN9",t:"player"},{n:"TUN10",t:"player"},
+       {n:"TUN11",t:"player"},{n:"TUN12",t:"player"},{n:"TUN13",t:"photo"},{n:"TUN14",t:"player"},{n:"TUN15",t:"player"},
+       {n:"TUN16",t:"player"},{n:"TUN17",t:"player"},{n:"TUN18",t:"player"},{n:"TUN19",t:"player"},{n:"TUN20",t:"player"}]},
+  BEL:{name:"Belgium",flag:"🇧🇪",color:"#C8102E",
+    s:[{n:"BEL1",t:"badge"},{n:"BEL2",t:"player"},{n:"BEL3",t:"player"},{n:"BEL4",t:"player"},{n:"BEL5",t:"player"},
+       {n:"BEL6",t:"player"},{n:"BEL7",t:"player"},{n:"BEL8",t:"player"},{n:"BEL9",t:"player"},{n:"BEL10",t:"player"},
+       {n:"BEL11",t:"player"},{n:"BEL12",t:"player"},{n:"BEL13",t:"photo"},{n:"BEL14",t:"player"},{n:"BEL15",t:"player"},
+       {n:"BEL16",t:"player"},{n:"BEL17",t:"player"},{n:"BEL18",t:"player"},{n:"BEL19",t:"player"},{n:"BEL20",t:"player"}]},
+  EGY:{name:"Egypt",flag:"🇪🇬",color:"#CE1126",
+    s:[{n:"EGY1",t:"badge"},{n:"EGY2",t:"player"},{n:"EGY3",t:"player"},{n:"EGY4",t:"player"},{n:"EGY5",t:"player"},
+       {n:"EGY6",t:"player"},{n:"EGY7",t:"player"},{n:"EGY8",t:"player"},{n:"EGY9",t:"player"},{n:"EGY10",t:"player"},
+       {n:"EGY11",t:"player"},{n:"EGY12",t:"player"},{n:"EGY13",t:"photo"},{n:"EGY14",t:"player"},{n:"EGY15",t:"player"},
+       {n:"EGY16",t:"player"},{n:"EGY17",t:"player"},{n:"EGY18",t:"player"},{n:"EGY19",t:"player"},{n:"EGY20",t:"player"}]},
+  IRN:{name:"Iran",flag:"🇮🇷",color:"#239F40",
+    s:[{n:"IRN1",t:"badge"},{n:"IRN2",t:"player"},{n:"IRN3",t:"player"},{n:"IRN4",t:"player"},{n:"IRN5",t:"player"},
+       {n:"IRN6",t:"player"},{n:"IRN7",t:"player"},{n:"IRN8",t:"player"},{n:"IRN9",t:"player"},{n:"IRN10",t:"player"},
+       {n:"IRN11",t:"player"},{n:"IRN12",t:"player"},{n:"IRN13",t:"photo"},{n:"IRN14",t:"player"},{n:"IRN15",t:"player"},
+       {n:"IRN16",t:"player"},{n:"IRN17",t:"player"},{n:"IRN18",t:"player"},{n:"IRN19",t:"player"},{n:"IRN20",t:"player"}]},
+  NZL:{name:"New Zealand",flag:"🇳🇿",color:"#555",
+    s:[{n:"NZL1",t:"badge"},{n:"NZL2",t:"player"},{n:"NZL3",t:"player"},{n:"NZL4",t:"player"},{n:"NZL5",t:"player"},
+       {n:"NZL6",t:"player"},{n:"NZL7",t:"player"},{n:"NZL8",t:"player"},{n:"NZL9",t:"player"},{n:"NZL10",t:"player"},
+       {n:"NZL11",t:"player"},{n:"NZL12",t:"player"},{n:"NZL13",t:"photo"},{n:"NZL14",t:"player"},{n:"NZL15",t:"player"},
+       {n:"NZL16",t:"player"},{n:"NZL17",t:"player"},{n:"NZL18",t:"player"},{n:"NZL19",t:"player"},{n:"NZL20",t:"player"}]},
+  ESP:{name:"Spain",flag:"🇪🇸",color:"#AA151B",
+    s:[{n:"ESP1",t:"badge"},{n:"ESP2",t:"player"},{n:"ESP3",t:"player"},{n:"ESP4",t:"player"},{n:"ESP5",t:"player"},
+       {n:"ESP6",t:"player"},{n:"ESP7",t:"player"},{n:"ESP8",t:"player"},{n:"ESP9",t:"player"},{n:"ESP10",t:"player"},
+       {n:"ESP11",t:"player"},{n:"ESP12",t:"player"},{n:"ESP13",t:"photo"},{n:"ESP14",t:"player"},{n:"ESP15",t:"player"},
+       {n:"ESP16",t:"player"},{n:"ESP17",t:"player"},{n:"ESP18",t:"player"},{n:"ESP19",t:"player"},{n:"ESP20",t:"player"}]},
+  CPV:{name:"Cape Verde",flag:"🇨🇻",color:"#003893",
+    s:[{n:"CPV1",t:"badge"},{n:"CPV2",t:"player"},{n:"CPV3",t:"player"},{n:"CPV4",t:"player"},{n:"CPV5",t:"player"},
+       {n:"CPV6",t:"player"},{n:"CPV7",t:"player"},{n:"CPV8",t:"player"},{n:"CPV9",t:"player"},{n:"CPV10",t:"player"},
+       {n:"CPV11",t:"player"},{n:"CPV12",t:"player"},{n:"CPV13",t:"photo"},{n:"CPV14",t:"player"},{n:"CPV15",t:"player"},
+       {n:"CPV16",t:"player"},{n:"CPV17",t:"player"},{n:"CPV18",t:"player"},{n:"CPV19",t:"player"},{n:"CPV20",t:"player"}]},
+  SAU:{name:"Saudi Arabia",flag:"🇸🇦",color:"#006C35",
+    s:[{n:"SAU1",t:"badge"},{n:"SAU2",t:"player"},{n:"SAU3",t:"player"},{n:"SAU4",t:"player"},{n:"SAU5",t:"player"},
+       {n:"SAU6",t:"player"},{n:"SAU7",t:"player"},{n:"SAU8",t:"player"},{n:"SAU9",t:"player"},{n:"SAU10",t:"player"},
+       {n:"SAU11",t:"player"},{n:"SAU12",t:"player"},{n:"SAU13",t:"photo"},{n:"SAU14",t:"player"},{n:"SAU15",t:"player"},
+       {n:"SAU16",t:"player"},{n:"SAU17",t:"player"},{n:"SAU18",t:"player"},{n:"SAU19",t:"player"},{n:"SAU20",t:"player"}]},
+  URU:{name:"Uruguay",flag:"🇺🇾",color:"#5EB6E4",
+    s:[{n:"URU1",t:"badge"},{n:"URU2",t:"player"},{n:"URU3",t:"player"},{n:"URU4",t:"player"},{n:"URU5",t:"player"},
+       {n:"URU6",t:"player"},{n:"URU7",t:"player"},{n:"URU8",t:"player"},{n:"URU9",t:"player"},{n:"URU10",t:"player"},
+       {n:"URU11",t:"player"},{n:"URU12",t:"player"},{n:"URU13",t:"photo"},{n:"URU14",t:"player"},{n:"URU15",t:"player"},
+       {n:"URU16",t:"player"},{n:"URU17",t:"player"},{n:"URU18",t:"player"},{n:"URU19",t:"player"},{n:"URU20",t:"player"}]},
+  FRA:{name:"France",flag:"🇫🇷",color:"#002395",
+    s:[{n:"FRA1",t:"badge"},{n:"FRA2",t:"player"},{n:"FRA3",t:"player"},{n:"FRA4",t:"player"},{n:"FRA5",t:"player"},
+       {n:"FRA6",t:"player"},{n:"FRA7",t:"player"},{n:"FRA8",t:"player"},{n:"FRA9",t:"player"},{n:"FRA10",t:"player"},
+       {n:"FRA11",t:"player"},{n:"FRA12",t:"player"},{n:"FRA13",t:"photo"},{n:"FRA14",t:"player"},{n:"FRA15",t:"player"},
+       {n:"FRA16",t:"player"},{n:"FRA17",t:"player"},{n:"FRA18",t:"player"},{n:"FRA19",t:"player"},{n:"FRA20",t:"player"}]},
+  SEN:{name:"Senegal",flag:"🇸🇳",color:"#00853F",
+    s:[{n:"SEN1",t:"badge"},{n:"SEN2",t:"player"},{n:"SEN3",t:"player"},{n:"SEN4",t:"player"},{n:"SEN5",t:"player"},
+       {n:"SEN6",t:"player"},{n:"SEN7",t:"player"},{n:"SEN8",t:"player"},{n:"SEN9",t:"player"},{n:"SEN10",t:"player"},
+       {n:"SEN11",t:"player"},{n:"SEN12",t:"player"},{n:"SEN13",t:"photo"},{n:"SEN14",t:"player"},{n:"SEN15",t:"player"},
+       {n:"SEN16",t:"player"},{n:"SEN17",t:"player"},{n:"SEN18",t:"player"},{n:"SEN19",t:"player"},{n:"SEN20",t:"player"}]},
+  IRQ:{name:"Iraq",flag:"🇮🇶",color:"#007A3D",
+    s:[{n:"IRQ1",t:"badge"},{n:"IRQ2",t:"player"},{n:"IRQ3",t:"player"},{n:"IRQ4",t:"player"},{n:"IRQ5",t:"player"},
+       {n:"IRQ6",t:"player"},{n:"IRQ7",t:"player"},{n:"IRQ8",t:"player"},{n:"IRQ9",t:"player"},{n:"IRQ10",t:"player"},
+       {n:"IRQ11",t:"player"},{n:"IRQ12",t:"player"},{n:"IRQ13",t:"photo"},{n:"IRQ14",t:"player"},{n:"IRQ15",t:"player"},
+       {n:"IRQ16",t:"player"},{n:"IRQ17",t:"player"},{n:"IRQ18",t:"player"},{n:"IRQ19",t:"player"},{n:"IRQ20",t:"player"}]},
+  NOR:{name:"Norway",flag:"🇳🇴",color:"#EF2B2D",
+    s:[{n:"NOR1",t:"badge"},{n:"NOR2",t:"player"},{n:"NOR3",t:"player"},{n:"NOR4",t:"player"},{n:"NOR5",t:"player"},
+       {n:"NOR6",t:"player"},{n:"NOR7",t:"player"},{n:"NOR8",t:"player"},{n:"NOR9",t:"player"},{n:"NOR10",t:"player"},
+       {n:"NOR11",t:"player"},{n:"NOR12",t:"player"},{n:"NOR13",t:"photo"},{n:"NOR14",t:"player"},{n:"NOR15",t:"player"},
+       {n:"NOR16",t:"player"},{n:"NOR17",t:"player"},{n:"NOR18",t:"player"},{n:"NOR19",t:"player"},{n:"NOR20",t:"player"}]},
+  ARG:{name:"Argentina",flag:"🇦🇷",color:"#74ACDF",
+    s:[{n:"ARG1",t:"badge"},{n:"ARG2",t:"player"},{n:"ARG3",t:"player"},{n:"ARG4",t:"player"},{n:"ARG5",t:"player"},
+       {n:"ARG6",t:"player"},{n:"ARG7",t:"player"},{n:"ARG8",t:"player"},{n:"ARG9",t:"player"},{n:"ARG10",t:"player"},
+       {n:"ARG11",t:"player"},{n:"ARG12",t:"player"},{n:"ARG13",t:"photo"},{n:"ARG14",t:"player"},{n:"ARG15",t:"player"},
+       {n:"ARG16",t:"player"},{n:"ARG17",t:"player"},{n:"ARG18",t:"player"},{n:"ARG19",t:"player"},{n:"ARG20",t:"player"}]},
+  ALG:{name:"Algeria",flag:"🇩🇿",color:"#006233",
+    s:[{n:"ALG1",t:"badge"},{n:"ALG2",t:"player"},{n:"ALG3",t:"player"},{n:"ALG4",t:"player"},{n:"ALG5",t:"player"},
+       {n:"ALG6",t:"player"},{n:"ALG7",t:"player"},{n:"ALG8",t:"player"},{n:"ALG9",t:"player"},{n:"ALG10",t:"player"},
+       {n:"ALG11",t:"player"},{n:"ALG12",t:"player"},{n:"ALG13",t:"photo"},{n:"ALG14",t:"player"},{n:"ALG15",t:"player"},
+       {n:"ALG16",t:"player"},{n:"ALG17",t:"player"},{n:"ALG18",t:"player"},{n:"ALG19",t:"player"},{n:"ALG20",t:"player"}]},
+  AUT:{name:"Austria",flag:"🇦🇹",color:"#ED2939",
+    s:[{n:"AUT1",t:"badge"},{n:"AUT2",t:"player"},{n:"AUT3",t:"player"},{n:"AUT4",t:"player"},{n:"AUT5",t:"player"},
+       {n:"AUT6",t:"player"},{n:"AUT7",t:"player"},{n:"AUT8",t:"player"},{n:"AUT9",t:"player"},{n:"AUT10",t:"player"},
+       {n:"AUT11",t:"player"},{n:"AUT12",t:"player"},{n:"AUT13",t:"photo"},{n:"AUT14",t:"player"},{n:"AUT15",t:"player"},
+       {n:"AUT16",t:"player"},{n:"AUT17",t:"player"},{n:"AUT18",t:"player"},{n:"AUT19",t:"player"},{n:"AUT20",t:"player"}]},
+  JOR:{name:"Jordan",flag:"🇯🇴",color:"#007A3D",
+    s:[{n:"JOR1",t:"badge"},{n:"JOR2",t:"player"},{n:"JOR3",t:"player"},{n:"JOR4",t:"player"},{n:"JOR5",t:"player"},
+       {n:"JOR6",t:"player"},{n:"JOR7",t:"player"},{n:"JOR8",t:"player"},{n:"JOR9",t:"player"},{n:"JOR10",t:"player"},
+       {n:"JOR11",t:"player"},{n:"JOR12",t:"player"},{n:"JOR13",t:"photo"},{n:"JOR14",t:"player"},{n:"JOR15",t:"player"},
+       {n:"JOR16",t:"player"},{n:"JOR17",t:"player"},{n:"JOR18",t:"player"},{n:"JOR19",t:"player"},{n:"JOR20",t:"player"}]},
+  POR:{name:"Portugal",flag:"🇵🇹",color:"#006600",
+    s:[{n:"POR1",t:"badge"},{n:"POR2",t:"player"},{n:"POR3",t:"player"},{n:"POR4",t:"player"},{n:"POR5",t:"player"},
+       {n:"POR6",t:"player"},{n:"POR7",t:"player"},{n:"POR8",t:"player"},{n:"POR9",t:"player"},{n:"POR10",t:"player"},
+       {n:"POR11",t:"player"},{n:"POR12",t:"player"},{n:"POR13",t:"photo"},{n:"POR14",t:"player"},{n:"POR15",t:"player"},
+       {n:"POR16",t:"player"},{n:"POR17",t:"player"},{n:"POR18",t:"player"},{n:"POR19",t:"player"},{n:"POR20",t:"player"}]},
+  COD:{name:"DR Congo",flag:"🇨🇩",color:"#007FFF",
+    s:[{n:"COD1",t:"badge"},{n:"COD2",t:"player"},{n:"COD3",t:"player"},{n:"COD4",t:"player"},{n:"COD5",t:"player"},
+       {n:"COD6",t:"player"},{n:"COD7",t:"player"},{n:"COD8",t:"player"},{n:"COD9",t:"player"},{n:"COD10",t:"player"},
+       {n:"COD11",t:"player"},{n:"COD12",t:"player"},{n:"COD13",t:"photo"},{n:"COD14",t:"player"},{n:"COD15",t:"player"},
+       {n:"COD16",t:"player"},{n:"COD17",t:"player"},{n:"COD18",t:"player"},{n:"COD19",t:"player"},{n:"COD20",t:"player"}]},
+  UZB:{name:"Uzbekistan",flag:"🇺🇿",color:"#1EB53A",
+    s:[{n:"UZB1",t:"badge"},{n:"UZB2",t:"player"},{n:"UZB3",t:"player"},{n:"UZB4",t:"player"},{n:"UZB5",t:"player"},
+       {n:"UZB6",t:"player"},{n:"UZB7",t:"player"},{n:"UZB8",t:"player"},{n:"UZB9",t:"player"},{n:"UZB10",t:"player"},
+       {n:"UZB11",t:"player"},{n:"UZB12",t:"player"},{n:"UZB13",t:"photo"},{n:"UZB14",t:"player"},{n:"UZB15",t:"player"},
+       {n:"UZB16",t:"player"},{n:"UZB17",t:"player"},{n:"UZB18",t:"player"},{n:"UZB19",t:"player"},{n:"UZB20",t:"player"}]},
+  COL:{name:"Colombia",flag:"🇨🇴",color:"#FCD116",
+    s:[{n:"COL1",t:"badge"},{n:"COL2",t:"player"},{n:"COL3",t:"player"},{n:"COL4",t:"player"},{n:"COL5",t:"player"},
+       {n:"COL6",t:"player"},{n:"COL7",t:"player"},{n:"COL8",t:"player"},{n:"COL9",t:"player"},{n:"COL10",t:"player"},
+       {n:"COL11",t:"player"},{n:"COL12",t:"player"},{n:"COL13",t:"photo"},{n:"COL14",t:"player"},{n:"COL15",t:"player"},
+       {n:"COL16",t:"player"},{n:"COL17",t:"player"},{n:"COL18",t:"player"},{n:"COL19",t:"player"},{n:"COL20",t:"player"}]},
+  ENG:{name:"England",flag:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",color:"#002868",
+    s:[{n:"ENG1",t:"badge"},{n:"ENG2",t:"player"},{n:"ENG3",t:"player"},{n:"ENG4",t:"player"},{n:"ENG5",t:"player"},
+       {n:"ENG6",t:"player"},{n:"ENG7",t:"player"},{n:"ENG8",t:"player"},{n:"ENG9",t:"player"},{n:"ENG10",t:"player"},
+       {n:"ENG11",t:"player"},{n:"ENG12",t:"player"},{n:"ENG13",t:"photo"},{n:"ENG14",t:"player"},{n:"ENG15",t:"player"},
+       {n:"ENG16",t:"player"},{n:"ENG17",t:"player"},{n:"ENG18",t:"player"},{n:"ENG19",t:"player"},{n:"ENG20",t:"player"}]},
+  CRO:{name:"Croatia",flag:"🇭🇷",color:"#FF0000",
+    s:[{n:"CRO1",t:"badge"},{n:"CRO2",t:"player"},{n:"CRO3",t:"player"},{n:"CRO4",t:"player"},{n:"CRO5",t:"player"},
+       {n:"CRO6",t:"player"},{n:"CRO7",t:"player"},{n:"CRO8",t:"player"},{n:"CRO9",t:"player"},{n:"CRO10",t:"player"},
+       {n:"CRO11",t:"player"},{n:"CRO12",t:"player"},{n:"CRO13",t:"photo"},{n:"CRO14",t:"player"},{n:"CRO15",t:"player"},
+       {n:"CRO16",t:"player"},{n:"CRO17",t:"player"},{n:"CRO18",t:"player"},{n:"CRO19",t:"player"},{n:"CRO20",t:"player"}]},
+  GHA:{name:"Ghana",flag:"🇬🇭",color:"#006B3F",
+    s:[{n:"GHA1",t:"badge"},{n:"GHA2",t:"player"},{n:"GHA3",t:"player"},{n:"GHA4",t:"player"},{n:"GHA5",t:"player"},
+       {n:"GHA6",t:"player"},{n:"GHA7",t:"player"},{n:"GHA8",t:"player"},{n:"GHA9",t:"player"},{n:"GHA10",t:"player"},
+       {n:"GHA11",t:"player"},{n:"GHA12",t:"player"},{n:"GHA13",t:"photo"},{n:"GHA14",t:"player"},{n:"GHA15",t:"player"},
+       {n:"GHA16",t:"player"},{n:"GHA17",t:"player"},{n:"GHA18",t:"player"},{n:"GHA19",t:"player"},{n:"GHA20",t:"player"}]},
+  PAN:{name:"Panama",flag:"🇵🇦",color:"#DA121A",
+    s:[{n:"PAN1",t:"badge"},{n:"PAN2",t:"player"},{n:"PAN3",t:"player"},{n:"PAN4",t:"player"},{n:"PAN5",t:"player"},
+       {n:"PAN6",t:"player"},{n:"PAN7",t:"player"},{n:"PAN8",t:"player"},{n:"PAN9",t:"player"},{n:"PAN10",t:"player"},
+       {n:"PAN11",t:"player"},{n:"PAN12",t:"player"},{n:"PAN13",t:"photo"},{n:"PAN14",t:"player"},{n:"PAN15",t:"player"},
+       {n:"PAN16",t:"player"},{n:"PAN17",t:"player"},{n:"PAN18",t:"player"},{n:"PAN19",t:"player"},{n:"PAN20",t:"player"}]},
+  // SPECIAL
+  FWC:{name:"FWC / Special",flag:"⭐",color:"#C9A84C",
+    s:[{n:"00",t:"badge"},{n:"FWC1",t:"badge"},{n:"FWC2",t:"badge"},{n:"FWC3",t:"badge"},{n:"FWC4",t:"badge"},
+       {n:"FWC5",t:"badge"},{n:"FWC6",t:"badge"},{n:"FWC7",t:"badge"},{n:"FWC8",t:"badge"},
+       {n:"FWC9",t:"badge"},{n:"FWC10",t:"badge"},{n:"FWC11",t:"badge"},{n:"FWC12",t:"badge"},
+       {n:"FWC13",t:"badge"},{n:"FWC14",t:"badge"},{n:"FWC15",t:"badge"},{n:"FWC16",t:"badge"},
+       {n:"FWC17",t:"badge"},{n:"FWC18",t:"badge"},{n:"FWC19",t:"badge"}]},
+  CC:{name:"Coca-Cola",flag:"🥤",color:"#E61A2F",
+    s:[{n:"CC1",t:"player"},{n:"CC2",t:"player"},{n:"CC3",t:"player"},{n:"CC4",t:"player"},{n:"CC5",t:"player"}]},
+};
+
+// ──────────────────────────────────────────────────────
+// STATE
+// ──────────────────────────────────────────────────────
+const SK='panini26_v5';
+let checked={}, extras={}, activeGroup='A', activeTeam='MEX', filterMode='all', searchVal='', showingDoubles=false;
+
+function load(){try{const d=JSON.parse(localStorage.getItem(SK))||{};checked=d.checked||{};extras=d.extras||{};}catch{checked={};extras={};}}
+function save(){try{localStorage.setItem(SK,JSON.stringify({checked,extras}));}catch{}}
+load();
+
+// ──────────────────────────────────────────────────────
+// STATS
+// ──────────────────────────────────────────────────────
+function totalAll(){return Object.values(TEAMS).reduce((s,t)=>s+t.s.length,0);}
+function collAll(){return Object.values(checked).filter(Boolean).length;}
+function teamColl(k){const t=TEAMS[k];return t?t.s.filter(s=>checked[s.n]).length:0;}
+function groupDone(gid){
+  const g=GROUPS.find(x=>x.id===gid);
+  if(!g) return false;
+  return g.teams.every(k=>{const t=TEAMS[k];return t&&teamColl(k)===t.s.length;});
+}
+
+function updateGlobal(){
+  const total=totalAll(),c=collAll(),pct=Math.round(c/total*100);
+  document.getElementById('gCount').innerHTML=`${c} <span>/ ${total}</span>`;
+  document.getElementById('gBar').style.width=pct+'%';
+  document.getElementById('gPct').textContent=pct+'%';
+}
+
+function updateTeamBar(){
+  const t=TEAMS[activeTeam];if(!t)return;
+  const c=teamColl(activeTeam),tot=t.s.length,pct=Math.round(c/tot*100);
+  document.getElementById('tBar').style.width=pct+'%';
+  document.getElementById('tBar').style.background=`linear-gradient(90deg,${t.color||'#D4A843'},#F0C96A)`;
+  document.getElementById('tStat').textContent=`${c} of ${tot} stickers · ${pct}%`;
+}
+
+// ──────────────────────────────────────────────────────
+// RENDER
+// ──────────────────────────────────────────────────────
+function renderGroupTabs(){
+  const el=document.getElementById('groupTabs');
+  el.innerHTML=GROUPS.map(g=>{
+    const done=groupDone(g.id);
+    const act=activeGroup===g.id && !['FWC','CC'].includes(activeTeam);
+    return `<button class="gtab${act?' active':''}${done?' done':''}" onclick="selectGroup('${g.id}')">
+      ${g.id}<br><span style="font-family:'Barlow',sans-serif;font-size:9px;font-weight:700;letter-spacing:0">
+      ${GROUPS.find(x=>x.id===g.id).teams.map(k=>TEAMS[k]?.flag||'').join('')}</span>
+    </button>`;
+  }).join('');
+  // special tabs
+  document.getElementById('specialTabs').innerHTML=SPECIAL.map(s=>{
+    const t=TEAMS[s.id];
+    const done=t&&teamColl(s.id)===t.s.length;
+    const act=activeTeam===s.id;
+    return `<button class="stab${act?' active':''}${done?' done':''}" onclick="selectSpecial('${s.id}')">${s.label}</button>`;
+  }).join('');
+}
+
+function renderGroupHeader(){
+  const isSpecial=['FWC','CC'].includes(activeTeam);
+  document.getElementById('grpHeader').style.display=isSpecial?'none':'block';
+  if(isSpecial)return;
+  const g=GROUPS.find(x=>x.id===activeGroup);if(!g)return;
+  document.getElementById('grpTitle').textContent=`GROUP ${g.id}`;
+  document.getElementById('grpTeams').innerHTML=g.teams.map(k=>{
+    const t=TEAMS[k];if(!t)return'';
+    const c=teamColl(k),tot=t.s.length,done=c===tot,act=k===activeTeam;
+    return `<div class="grp-team-pill${act?' active':''}${done?' done':''}" onclick="selectTeam('${k}')">
+      <span class="pill-flag">${t.flag}</span>${t.name}<span class="pill-pct">${c}/${tot}</span>
+    </div>`;
+  }).join('');
+}
+
+function renderTeamHdr(){
+  const t=TEAMS[activeTeam];
+  document.getElementById('teamHdr').style.display=t?'flex':'none';
+  if(!t)return;
+  document.getElementById('tFlag').textContent=t.flag;
+  document.getElementById('tName').textContent=t.name.toUpperCase();
+  updateTeamBar();
+}
+
+function renderStickers(){
+  const t=TEAMS[activeTeam];if(!t){document.getElementById('slist').innerHTML='';return;}
+  let stickers=t.s;
+  if(filterMode==='missing') stickers=stickers.filter(s=>!checked[s.n]);
+  if(filterMode==='have')    stickers=stickers.filter(s=>!!checked[s.n]);
+  const list=document.getElementById('slist');
+  if(!stickers.length){
+    list.innerHTML=`<div class="empty"><div class="empty-icon">${filterMode==='missing'?'🎉':'📭'}</div>
+      <div style="font-size:15px">${filterMode==='missing'?'All stickers collected!':'No stickers collected yet.'}</div></div>`;
+    return;
+  }
+  const isBadge=s=>s.t==='badge';
+  const isPhoto=s=>s.t==='photo';
+  list.innerHTML=stickers.map(s=>{
+    const chk=!!checked[s.n];
+    const ex=extras[s.n]||0;
+    const foilRow=isBadge(s);
+    let tagHtml='';
+    if(isBadge(s)) tagHtml=`<span class="stag tag-foil">✦ FOIL</span>`;
+    else if(isPhoto(s)) tagHtml=`<span class="stag tag-photo">📷 PHOTO</span>`;
+    else tagHtml=`<span class="stag tag-player">PLAYER</span>`;
+    const dblBadge=ex>0?`<span class="dbl-badge">+${ex}</span>`:'';
+    const qtyHtml=chk?`
+      <div class="qty-wrap" onclick="event.stopPropagation()">
+        <button class="qty-btn qminus" onclick="changeQty('${s.n}',-1)">−</button>
+        <div class="qty-num${ex>0?' has-extra':''}">${1+ex}</div>
+        <button class="qty-btn qplus" onclick="changeQty('${s.n}',1)">+</button>
+      </div>`:'';
+    return `<div class="srow${chk?' chk':''}${foilRow?' foil-s':''}" onclick="toggle('${s.n}')">
+      <div class="chkbox">${chk?'✓':''}</div>
+      <div class="snum">${s.n}</div>
+      <div style="display:flex;align-items:center;gap:4px;flex:1">${tagHtml}${dblBadge}</div>
+      ${qtyHtml}
+    </div>`;
+  }).join('');
+}
+
+function renderJumpSel(){
+  const sel=document.getElementById('jumpSel');
+  let html='<optgroup label="── Groups ──">';
+  GROUPS.forEach(g=>{
+    html+=`<optgroup label="Group ${g.id}">`;
+    g.teams.forEach(k=>{if(TEAMS[k])html+=`<option value="${k}|${g.id}"${activeTeam===k?'selected':''}>${TEAMS[k].flag} ${TEAMS[k].name}</option>`;});
+    html+='</optgroup>';
+  });
+  html+='<optgroup label="── Special ──">';
+  SPECIAL.forEach(s=>{if(TEAMS[s.id])html+=`<option value="${s.id}|SP"${activeTeam===s.id?'selected':''}>${TEAMS[s.id].flag} ${TEAMS[s.id].name}</option>`;});
+  html+='</optgroup>';
+  sel.innerHTML=html;
+}
+
+function renderAll(){
+  renderGroupTabs();
+  renderGroupHeader();
+  renderTeamHdr();
+  renderStickers();
+  updateGlobal();
+  updateFilters();
+  renderJumpSel();
+}
+
+// ──────────────────────────────────────────────────────
+// INTERACTIONS
+// ──────────────────────────────────────────────────────
+function selectGroup(gid){
+  activeGroup=gid;
+  const g=GROUPS.find(x=>x.id===gid);
+  if(g) activeTeam=g.teams[0];
+  filterMode='all';
+  renderAll();
+  document.querySelector('.grp-header').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function selectTeam(k){
+  activeTeam=k;
+  filterMode='all';
+  renderAll();
+  document.querySelector('.team-hdr').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function selectSpecial(id){
+  activeTeam=id;
+  filterMode='all';
+  renderAll();
+}
+
+function jumpTo(val){
+  const [k,gid]=val.split('|');
+  if(gid==='SP'){ selectSpecial(k); }
+  else { activeGroup=gid; activeTeam=k; filterMode='all'; renderAll();
+    document.querySelector('.grp-header').scrollIntoView({behavior:'smooth',block:'start'}); }
+}
+
+function toggle(id){
+  checked[id]=!checked[id];
+  if(!checked[id]) delete extras[id]; // removing sticker clears extras
+  save();
+  // re-render sticker row in place
+  renderStickers();
+  updateGlobal();updateTeamBar();renderGroupHeader();renderGroupTabs();
+  if(showingDoubles) renderDoubles();
+}
+
+function changeQty(id, delta){
+  if(!checked[id]) return;
+  const cur=extras[id]||0;
+  const next=Math.max(0, cur+delta);
+  if(next===0) delete extras[id]; else extras[id]=next;
+  save();
+  renderStickers();
+  if(showingDoubles) renderDoubles();
+}
+
+function totalDoubles(){
+  return Object.entries(extras).reduce((s,[,v])=>s+v,0);
+}
+
+function renderDoubles(){
+  const view=document.getElementById('doublesView');
+  // gather all extras
+  const entries=Object.entries(extras).filter(([,v])=>v>0);
+  if(!entries.length){
+    view.innerHTML=`<div class="dbl-header"><div class="dbl-title">🔁 Doubles</div></div>
+      <div class="empty"><div class="empty-icon">🎊</div><div style="font-size:15px">No doubles yet!<br><span style="font-size:12px;opacity:.6">Tap + on a sticker you own more than once.</span></div></div>`;
+    return;
+  }
+  // group by team
+  const byTeam={};
+  // build lookup: sticker id → team key
+  Object.entries(TEAMS).forEach(([k,t])=>{t.s.forEach(s=>{if(extras[s.n]>0) {
+    if(!byTeam[k]) byTeam[k]=[];
+    byTeam[k].push(s.n);
+  }})});
+  const totalEx=entries.reduce((s,[,v])=>s+v,0);
+  let html=`<div class="dbl-header">
+    <div class="dbl-title">🔁 Doubles</div>
+    <div class="dbl-total">${totalEx} extra sticker${totalEx!==1?'s':''}</div>
+  </div>`;
+  // order by groups then special
+  const allGroupKeys=GROUPS.flatMap(g=>g.teams);
+  const specialKeys=['FWC','CC'];
+  const orderedKeys=[...allGroupKeys,...specialKeys].filter(k=>byTeam[k]);
+  orderedKeys.forEach(k=>{
+    const t=TEAMS[k];if(!t||!byTeam[k])return;
+    const grp=GROUPS.find(g=>g.teams.includes(k));
+    const grpLabel=grp?`Group ${grp.id} · `:'';
+    html+=`<div class="dbl-team-block">
+      <div class="dbl-team-label"><span>${t.flag}</span>${grpLabel}${t.name}</div>`;
+    byTeam[k].forEach(id=>{
+      const ex=extras[id]||0;
+      html+=`<div class="dbl-row">
+        <div class="dbl-num">${id}</div>
+        <div style="flex:1;font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px">
+          ${ex>0?'Extra copies':''}
+        </div>
+        <div class="dbl-x">×${ex+1}</div>
+        <div class="qty-wrap" style="margin-left:8px">
+          <button class="qty-btn qminus" onclick="changeQty('${id}',-1)">−</button>
+          <div class="qty-num has-extra">${ex}</div>
+          <button class="qty-btn qplus" onclick="changeQty('${id}',1)">+</button>
+        </div>
+      </div>`;
+    });
+    html+='</div>';
+  });
+  view.innerHTML=html;
+}
+
+let showingGlobalMissing=false;
+
+function getMainEls(){
+  return {
+    srch: document.querySelector('.srch'),
+    gtabs: document.querySelector('.gtabs'),
+    stabs: document.querySelector('.stabs'),
+    grpHeader: document.getElementById('grpHeader'),
+    teamHdr: document.getElementById('teamHdr'),
+    tbar: document.querySelector('.tbar-wrap'),
+    frow: document.querySelector('.frow'),
+    slist: document.getElementById('slist'),
+  };
+}
+
+function hideMainUI(){
+  const e=getMainEls();
+  e.srch.style.display='none'; e.gtabs.style.display='none';
+  e.stabs.style.display='none'; e.grpHeader.style.display='none';
+  e.teamHdr.style.display='none'; e.tbar.style.display='none';
+  e.frow.style.display='none'; e.slist.style.display='none';
+}
+
+function showMainUI(){
+  const e=getMainEls();
+  e.srch.style.display='block'; e.gtabs.style.display='block';
+  e.stabs.style.display='flex';
+  e.grpHeader.style.display=['FWC','CC'].includes(activeTeam)?'none':'block';
+  e.teamHdr.style.display='flex'; e.tbar.style.display='block';
+  e.frow.style.display='flex'; e.slist.style.display='flex';
+}
+
+function toggleDoubles(){
+  // if global missing is open, close it first
+  if(showingGlobalMissing){ showingGlobalMissing=false; document.getElementById('globalMissingView').style.display='none'; document.getElementById('fGlobalMissing').classList.remove('active'); }
+  showingDoubles=!showingDoubles;
+  const dblBtn=document.getElementById('dblBtn');
+  document.getElementById('doublesView').style.display=showingDoubles?'block':'none';
+  if(showingDoubles){ hideMainUI(); } else { showMainUI(); }
+  dblBtn.classList.toggle('active-dbl',showingDoubles);
+  dblBtn.textContent=showingDoubles?'← Back':'🔁 Doubles';
+  if(showingDoubles) renderDoubles();
+}
+
+function toggleGlobalMissing(){
+  // if doubles is open, close it first
+  if(showingDoubles){ showingDoubles=false; document.getElementById('doublesView').style.display='none'; document.getElementById('dblBtn').classList.remove('active-dbl'); document.getElementById('dblBtn').textContent='🔁 Doubles'; }
+  showingGlobalMissing=!showingGlobalMissing;
+  const btn=document.getElementById('fGlobalMissing');
+  document.getElementById('globalMissingView').style.display=showingGlobalMissing?'block':'none';
+  if(showingGlobalMissing){ hideMainUI(); document.querySelector('.frow').style.display='flex'; btn.classList.add('active'); renderGlobalMissing(); }
+  else { showMainUI(); btn.classList.remove('active'); }
+}
+
+function renderGlobalMissing(){
+  const view=document.getElementById('globalMissingView');
+  const allGroupKeys=GROUPS.flatMap(g=>g.teams);
+  const orderedKeys=[...allGroupKeys,'FWC','CC'];
+  let totalMissing=0;
+  const teamBlocks=[];
+  orderedKeys.forEach(k=>{
+    const t=TEAMS[k]; if(!t) return;
+    const missing=t.s.filter(s=>!checked[s.n]);
+    if(!missing.length) return;
+    totalMissing+=missing.length;
+    const grp=GROUPS.find(g=>g.teams.includes(k));
+    const grpLabel=grp?`Group ${grp.id} · `:'';
+    const rows=missing.map(s=>{
+      let tagHtml='';
+      if(s.t==='badge') tagHtml=`<span class="stag tag-foil">✦ FOIL</span>`;
+      else if(s.t==='photo') tagHtml=`<span class="stag tag-photo">📷 PHOTO</span>`;
+      else tagHtml=`<span class="stag tag-player">PLAYER</span>`;
+      return `<div class="dbl-row" style="border-color:rgba(239,120,48,.2);cursor:pointer" onclick="checkFromGlobal('${s.n}','${k}')">
+        <div class="dbl-num" style="color:#e87830">${s.n}</div>
+        <div style="flex:1">${tagHtml}</div>
+        <div style="font-size:20px;color:rgba(255,255,255,.15)">✓</div>
+      </div>`;
+    }).join('');
+    teamBlocks.push(`<div class="dbl-team-block">
+      <div class="dbl-team-label"><span>${t.flag}</span>${grpLabel}${t.name} <span style="color:#e87830;margin-left:4px">(${missing.length})</span></div>
+      ${rows}
+    </div>`);
+  });
+  if(!totalMissing){
+    view.innerHTML=`<div class="dbl-header"><div class="dbl-title" style="color:#e87830">🔍 Missing Stickers</div></div>
+      <div class="empty"><div class="empty-icon">🏆</div><div style="font-size:15px">Album complete! No missing stickers.</div></div>`;
+    return;
+  }
+  view.innerHTML=`<div class="dbl-header">
+    <div class="dbl-title" style="color:#e87830">🔍 Missing Stickers</div>
+    <div class="dbl-total">${totalMissing} sticker${totalMissing!==1?'s':''} needed</div>
+  </div>
+  <div style="padding:0 0 8px;font-size:12px;color:var(--muted)">Tap any sticker to mark it as collected.</div>
+  ${teamBlocks.join('')}`;
+}
+
+function checkFromGlobal(id, teamKey){
+  checked[id]=true; save();
+  renderGlobalMissing();
+  updateGlobal();
+  renderGroupTabs();
+}
+
+function shareMissing(){
+  const allGroupKeys=GROUPS.flatMap(g=>g.teams);
+  const orderedKeys=[...allGroupKeys,'FWC','CC'];
+  let totalMissing=0;
+  let lines=['🔍 PANINI WC 2026 — STICKERS I NEED','─'.repeat(30),''];
+  orderedKeys.forEach(k=>{
+    const t=TEAMS[k]; if(!t) return;
+    const missing=t.s.filter(s=>!checked[s.n]);
+    if(!missing.length) return;
+    totalMissing+=missing.length;
+    const grp=GROUPS.find(g=>g.teams.includes(k));
+    const grpLabel=grp?`[Group ${grp.id}] `:'';
+    lines.push(`${t.flag} ${grpLabel}${t.name.toUpperCase()} (${missing.length} needed)`);
+    lines.push('  '+missing.map(s=>s.n).join('  '));
+    lines.push('');
+  });
+  if(!totalMissing){ showToast('🏆 No missing stickers — album complete!'); closeModal(); return; }
+  lines.push('─'.repeat(30));
+  lines.push(`Total: ${totalMissing} sticker${totalMissing!==1?'s':''} needed`);
+  lines.push('Generated with Panini WC 2026 Checklist');
+  const text=lines.join('\n');
+  if(navigator.share){
+    navigator.share({title:'My Panini WC 2026 Missing Stickers', text}).catch(()=>{});
+    closeModal();
+  } else {
+    navigator.clipboard.writeText(text).then(()=>{
+      showToast('✅ Missing list copied — paste anywhere!'); closeModal();
+    }).catch(()=>{
+      document.getElementById('importText').value=text;
+      showToast('📋 List pasted into the box — copy it manually');
+    });
+  }
+}
+
+function markAll(){
+  const t=TEAMS[activeTeam];if(!t)return;
+  t.s.forEach(s=>checked[s.n]=true);save();renderAll();
+}
+
+function resetTeam(){
+  const t=TEAMS[activeTeam];if(!t||!confirm(`Reset stickers for ${t.name}?`))return;
+  t.s.forEach(s=>{delete checked[s.n];delete extras[s.n];});save();renderAll();
+}
+
+function setFilter(m){
+  filterMode=m;updateFilters();renderStickers();
+}
+
+function updateFilters(){
+  document.getElementById('fAll').classList.toggle('active',filterMode==='all');
+  document.getElementById('fMissing').classList.toggle('active',filterMode==='missing');
+  document.getElementById('fHave').classList.toggle('active',filterMode==='have');
+  document.getElementById('fGlobalMissing').classList.toggle('active',showingGlobalMissing);
+}
+
+function doSearch(v){
+  searchVal=v.toLowerCase();
+  // highlight or jump to first matching team
+  const allKeys=Object.keys(TEAMS);
+  const match=allKeys.find(k=>TEAMS[k].name.toLowerCase().includes(searchVal)&&searchVal.length>1);
+  if(match){
+    const grp=GROUPS.find(g=>g.teams.includes(match));
+    if(grp){activeGroup=grp.id;activeTeam=match;}
+    else{activeTeam=match;}
+    renderAll();
+  }
+}
+
+// ──────────────────────────────────────────────────────
+// EXPORT / IMPORT
+// ──────────────────────────────────────────────────────
+function openModal(){ document.getElementById('exportModal').style.display='flex'; }
+function closeModal(){ document.getElementById('exportModal').style.display='none'; }
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+
+function exportBackup(){
+  const data=JSON.stringify({checked,extras,v:'panini26_v5'});
+  const encoded=btoa(unescape(encodeURIComponent(data)));
+  navigator.clipboard.writeText(encoded).then(()=>{
+    showToast('✅ Backup code copied!');
+  }).catch(()=>{
+    // fallback: show in textarea
+    document.getElementById('importText').value=encoded;
+    showToast('📋 Code pasted into the box below — copy it manually');
+  });
+}
+
+function importBackup(){
+  const raw=document.getElementById('importText').value.trim();
+  if(!raw){ showToast('⚠️ Please paste a backup code first'); return; }
+  try{
+    const data=JSON.parse(decodeURIComponent(escape(atob(raw))));
+    if(!data.v||data.v!=='panini26_v5') throw new Error('wrong version');
+    checked=data.checked||{};
+    extras=data.extras||{};
+    save();
+    closeModal();
+    renderAll();
+    showToast('✅ Progress restored!');
+  }catch(e){
+    showToast('❌ Invalid backup code — please check and try again');
+  }
+}
+
+function shareDoubles(){
+  const entries=Object.entries(extras).filter(([,v])=>v>0);
+  if(!entries.length){ showToast('No doubles to share yet!'); return; }
+
+  // Build lookup: sticker id → team key
+  const stickerTeam={};
+  Object.entries(TEAMS).forEach(([k,t])=>t.s.forEach(s=>stickerTeam[s.n]=k));
+
+  // Group by team in group order
+  const byTeam={};
+  entries.forEach(([id,qty])=>{
+    const k=stickerTeam[id];if(!k)return;
+    if(!byTeam[k])byTeam[k]=[];
+    byTeam[k].push({id,qty});
+  });
+
+  const allGroupKeys=GROUPS.flatMap(g=>g.teams);
+  const orderedKeys=[...allGroupKeys,'FWC','CC'].filter(k=>byTeam[k]);
+
+  const totalEx=entries.reduce((s,[,v])=>s+v,0);
+  let lines=['🏆 PANINI WC 2026 — MY DOUBLES','─'.repeat(30),''];
+
+  orderedKeys.forEach(k=>{
+    const t=TEAMS[k];if(!t)return;
+    const grp=GROUPS.find(g=>g.teams.includes(k));
+    const grpLabel=grp?`[Group ${grp.id}] `:'';
+    lines.push(`${t.flag} ${grpLabel}${t.name.toUpperCase()}`);
+    byTeam[k].forEach(({id,qty})=>{
+      lines.push(`  ${id}${qty>1?` (×${qty+1} — ${qty} extra)`:''}`);
+    });
+    lines.push('');
+  });
+
+  lines.push('─'.repeat(30));
+  lines.push(`Total: ${totalEx} extra sticker${totalEx!==1?'s':''}`);
+  lines.push('Generated with Panini WC 2026 Checklist');
+
+  const text=lines.join('\n');
+
+  // Try native share first (mobile), fall back to clipboard
+  if(navigator.share){
+    navigator.share({ title:'My Panini WC 2026 Doubles', text }).catch(()=>{});
+    closeModal();
+  } else {
+    navigator.clipboard.writeText(text).then(()=>{
+      showToast('✅ Doubles list copied — paste anywhere!');
+      closeModal();
+    }).catch(()=>{
+      document.getElementById('importText').value=text;
+      showToast('📋 List pasted into the box — copy it manually');
+    });
+  }
+}
+
+// ──────────────────────────────────────────────────────
+// INIT
+// ──────────────────────────────────────────────────────
+renderAll();
+</script>
+</body>
+</html>
